@@ -13,24 +13,6 @@ function requireAuth(req: Request, res: Response, next: NextFunction): void {
   res.send(`Whoops! you are not logged in`);
 }
 
-router.get("/login", (req: Request, res: Response, next: NextFunction) => {
-  res.send(`
-    <div>
-      <form method="post" action"">
-        <div>
-            <label>Email</label>
-            <input type="email" name="email" />
-        </div>
-        <div>
-            <label>Password</label>
-            <input type="password" name="password" />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  `);
-});
-
 router.post("/login", (req: RequestBody, res: Response) => {
   const { email, password } = req.body;
   if (
