@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { NextFunction, Request, Response, Router } from 'express';
 
 const router = Router();
 interface RequestBody extends Request {
@@ -13,22 +13,7 @@ function requireAuth(req: Request, res: Response, next: NextFunction): void {
   res.send(`Whoops! you are not logged in`);
 }
 
-router.post("/login", (req: RequestBody, res: Response) => {
-  const { email, password } = req.body;
-  if (
-    email &&
-    password &&
-    email === "test@test.com" &&
-    password === "test@1234"
-  ) {
-    req.session = { loggedIn: true };
-    res.redirect("/");
-  } else {
-    res.send(`Please enter a valid email address and a password`);
-  }
-});
-
-router.get("/", (req: Request, res: Response, next: NextFunction) => {
+router.get('/', (req: Request, res: Response, next: NextFunction) => {
   if (req.session && req.session.loggedIn) {
     res.send(`
       <div>
@@ -46,12 +31,7 @@ router.get("/", (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-router.get("/logout", (req: Request, res: Response) => {
-  req.session = undefined;
-  res.redirect("/");
-});
-
-router.get("/protected", requireAuth, (req: Request, res: Response) => {
+router.get('/protected', requireAuth, (req: Request, res: Response) => {
   res.send(`This is a protected endpoit`);
 });
 
